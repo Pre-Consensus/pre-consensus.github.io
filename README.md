@@ -117,6 +117,35 @@ That shows every change to the positions and reasoning, and nothing else.
 
 ---
 
+## Licensing
+
+Two licenses, because the code and the research are different things.
+
+- **`LICENSE` (MIT)** — the site itself: `index.html`, `app.js`, `styles.css`,
+  `scripts/`, the workflow. Anyone can take it and run their own portfolio with it.
+- **`LICENSE-CONTENT` (CC BY-NC 4.0)** — the written theses and trade notes. Quote it,
+  discuss it, reproduce it to check the record. Don't sell it or put it in a paid
+  newsletter.
+
+If a single MIT license covered everything, anyone could repackage your research and
+charge for it. If everything were CC BY-NC, nobody could reuse the code. Splitting them
+is the normal answer for a repo that is part software and part writing.
+
+## What never gets committed
+
+`.gitignore` blocks brokerage documents specifically — `private/`, any `*.csv` or
+`*.xlsx`, and anything matching `*statement*.pdf` or `*confirmation*.pdf`. A Public.com
+export contains your account number, and this repository is public and permanent.
+
+**Download broker exports into `private/`.** It's ignored, it survives a fresh clone,
+and it's the right place to keep a statement open while you copy fills into
+`data/portfolio.json`.
+
+Secrets are ignored too (`.env`, `*.pem`, `*.key`). The Finnhub key, if you add one,
+belongs in GitHub repo secrets — never in a file here.
+
+---
+
 ## Disclaimer
 
 Publishing your own positions and reasoning is not regulated investment advice. It stays

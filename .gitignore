@@ -1,2 +1,34 @@
+# ── macOS / editor noise ──────────────────────────────────────────
 .DS_Store
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*~
+.idea/
+.vscode/
+
+# ── logs / scratch ────────────────────────────────────────────────
 *.log
+.cache/
+
+# ── secrets ───────────────────────────────────────────────────────
+# FINNHUB_KEY belongs in GitHub repo secrets, never in a file here.
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+
+# ── brokerage documents — READ THIS ───────────────────────────────
+# This repository is PUBLIC and its history is permanent. A Public.com
+# statement or trade-confirmation export contains your account number.
+# Anything you download from the broker goes in private/ and never gets
+# committed. Belt and braces: the file patterns are ignored too.
+private/
+!private/README.txt
+statements/
+*.csv
+*.xlsx
+*statement*.pdf
+*confirmation*.pdf

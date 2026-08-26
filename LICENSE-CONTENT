@@ -1,0 +1,36 @@
+CONTENT LICENSE
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+Copyright (c) 2026 Andres Lanfranco
+
+APPLIES TO
+  data/theses/          -- the written investment theses
+  data/portfolio.json   -- the trade notes, updates, and method text
+  index.html            -- the written copy, as distinct from the markup
+
+Full legal text:  https://creativecommons.org/licenses/by-nc/4.0/legalcode
+Plain-language summary:  https://creativecommons.org/licenses/by-nc/4.0/
+
+WHAT THIS MEANS
+
+You may:
+  - quote, excerpt, and discuss this research
+  - republish it with attribution and a link back
+  - reproduce it in full to fact-check the record, which is the entire point
+    of publishing it in a public repository
+
+You may not:
+  - sell it, put it behind a paywall, or use it in a commercial product or
+    newsletter without permission
+
+WHY THE RECORD IS NOT REVISED
+
+Corrections are published as new dated entries. Earlier entries are left
+standing, including the wrong ones. Any copy of this repository can be
+checked against its own commit history.
+
+NOT INVESTMENT ADVICE
+
+This is a personal record of the author's own positions, published to keep an
+honest score. It is not investment advice, not a recommendation, and not a
+solicitation. The author holds the positions described.
