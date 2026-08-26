@@ -11,7 +11,7 @@
   "benchmark": {
     "symbol": "SPY",
     "startDate": "2026-08-26",
-    "startPrice": 0
+    "startPrice": 765.91
   },
   "cashFlows": [],
   "methodLede": "The rules I hold myself to, written down before they became inconvenient.",
