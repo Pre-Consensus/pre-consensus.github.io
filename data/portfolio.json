@@ -6,7 +6,7 @@
   "broker": "Public.com",
   "inceptionDate": "2026-08-26",
   "startingCash": 25000,
-  "repoUrl": "https://github.com/Pre-Consensus/preconsensus",
+  "repoUrl": "https://github.com/Pre-Consensus/pre-consensus.github.io",
   "repoBranch": "main",
   "benchmark": {
     "symbol": "SPY",
