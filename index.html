@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-Consensus</title>
+<meta name="description" content="A real-money portfolio, published before the consensus catches up. Every position, every thesis, timestamped in public.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <a class="brand" href="#/">
+    <span class="monogram" aria-hidden="true">
+      <!-- Drop your real logo in assets/logo.svg and it replaces this automatically -->
+      <img src="assets/logo.svg" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'monogram-type',textContent:'PC'}))">
+    </span>
+    <span class="wordmark">Pre&#8209;Consensus</span>
+  </a>
+  <nav class="nav">
+    <a href="#/">Portfolio</a>
+    <a href="#/log">Log</a>
+    <a href="#/method">Method</a>
+  </nav>
+</header>
+
+<main id="app" class="app">
+  <div class="loading">Loading&#8230;</div>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-label">Verification</div>
+      <p>Every trade and every thesis in this portfolio is committed to a public git repository at the moment it is written. Commit history is immutable and independently checkable. Nothing here can be backdated.</p>
+      <p id="repo-link-wrap" hidden>&#8594; <a id="repo-link" href="#" rel="noopener">Inspect the commit history</a></p>
+    </div>
+    <div>
+      <div class="footer-label">Disclaimer</div>
+      <p>This is a personal record of my own investments, published for the sake of keeping score honestly. It is not investment advice, not a recommendation, and not a solicitation. I hold the positions described. You can lose money in markets, and I do too. Do your own work.</p>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>Pre-Consensus &#183; <span id="footer-year"></span></span>
+    <span id="price-stamp" class="stamp">&#8212;</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

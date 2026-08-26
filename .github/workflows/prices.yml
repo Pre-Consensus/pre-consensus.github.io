@@ -1,0 +1,44 @@
+name: Refresh prices
+
+on:
+  schedule:
+    # Every 30 minutes during US market hours (13:30–20:00 UTC ≈ 9:30–16:00 ET),
+    # plus one settling run after the close. GitHub cron is UTC and does not
+    # follow daylight saving, so this drifts by an hour half the year — harmless.
+    - cron: '*/30 13-20 * * 1-5'
+    - cron: '15 21 * * 1-5'
+  workflow_dispatch:        # lets you refresh by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prices
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch quotes
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}   # optional; skipped if unset
+        run: python3 scripts/fetch_prices.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "pre-consensus-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/prices.json data/portfolio.json
+          if git diff --staged --quiet; then
+            echo "No price change."
+          else
+            git commit -m "prices: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

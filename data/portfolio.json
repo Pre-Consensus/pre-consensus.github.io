@@ -1,0 +1,48 @@
+{
+  "seedData": true,
+  "siteTitle": "Pre-Consensus",
+  "headline": "Conviction, priced in public.",
+  "subhead": "A real-money portfolio. Every buy, every sell, and the reasoning behind both \u2014 published at the moment of the decision, not after the outcome is known.",
+  "broker": "Public.com",
+  "inceptionDate": "2026-08-26",
+  "startingCash": 25000,
+  "repoUrl": "https://github.com/Pre-Consensus/preconsensus",
+  "repoBranch": "main",
+  "benchmark": {
+    "symbol": "SPY",
+    "startDate": "2026-08-26",
+    "startPrice": 0
+  },
+  "cashFlows": [],
+  "methodLede": "The rules I hold myself to, written down before they became inconvenient.",
+  "method": "## Why this exists\n\nMost investment writing is graded on prose. This portfolio is graded on money. Every idea here is one I own, sized in dollars I would rather not lose, and the record is kept where I cannot quietly revise it.\n\n## The commitment\n\n- **Positions are published within one trading day of the fill.** Not the week after, not once it works.\n- **The thesis is written before the buy, not after.** If I can't say what I think the market is missing, I don't own it.\n- **Every position names its falsifiers.** The specific things that, if they happen, mean I was wrong. They are listed on the position page and I don't get to move them.\n- **Losers stay on the site.** Closed positions keep their page and their result. A track record that only shows winners isn't a track record.\n\n## How to check me\n\nThis site is generated from a public git repository. Each trade and each thesis is a commit with a timestamp I cannot forge. If you want to know whether a call was really made before the move, read the commit history rather than taking my word for it.\n\n## What this is not\n\nI am not managing money for anyone, not selling anything, and not licensed to advise you. This is my own account. Treat it as one person showing their work.",
+  "positions": [
+    {
+      "ticker": "EXMPL",
+      "name": "Example Holdings Inc. \u2014 replace me",
+      "thesisIn": "A one-sentence version of the thesis, shown in the sidebar.",
+      "falsifiers": [
+        "The specific event that would tell you the thesis is broken.",
+        "A second one. Be concrete \u2014 numbers and dates, not vibes.",
+        "A third. If you can't name three, you don't understand the position yet."
+      ],
+      "trades": [
+        {
+          "date": "2026-08-26",
+          "action": "buy",
+          "qty": 100,
+          "price": 40.0,
+          "fees": 0,
+          "note": "Placeholder fill. Replace with your real Public.com execution: date, share count, and the price you actually got."
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-08-26",
+          "title": "Position opened",
+          "body": "Updates go here as the thesis develops. Each one is a dated entry \u2014 add to the list, never edit an old one. If you were wrong, say so in a new entry and leave the old one standing."
+        }
+      ]
+    }
+  ]
+}
