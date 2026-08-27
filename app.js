@@ -69,7 +69,7 @@ function md(src){
       out.push(`<h${lvl}>${inline(m[2])}</h${lvl}>`);
     } else if(/^(---|\*\*\*|___)$/.test(line)){
       flush(); out.push('<hr>');
-    } else if((m = line.match(/^>\s?(.*)$/))){
+    } else if((m = line.match(/^(?:>|&gt;)\s?(.*)$/))){   // escaping runs first, so '>' arrives as '&gt;'
       flush(); out.push('<blockquote>'+inline(m[1])+'</blockquote>');
     } else if((m = line.match(/^[-*+]\s+(.*)$/))){
       flushPara();
@@ -303,6 +303,69 @@ function viewPortfolio(){
   `;
 }
 
+/* ---------- video + documents ----------
+   YouTube's real player is a heavy, colourful thing that would wreck both the
+   load time and the look of the page. So we render a still frame ourselves and
+   only load YouTube once the reader actually clicks. Nothing from Google is
+   requested until then. */
+
+function videoBlock(video){
+  if(!video) return '';
+  const id = String(video.id || video).trim();
+  if(!/^[A-Za-z0-9_-]{11}$/.test(id)) return '';   // a YouTube id is exactly 11 chars
+  const title = esc(video.title || 'Watch the walkthrough');
+  const note  = video.note ? `<p class="video-note">${esc(video.note)}</p>` : '';
+  return `
+    <section class="section">
+      <div class="section-head"><h2>Video</h2><span class="note">Plays here · hosted on YouTube</span></div>
+      <div class="video" data-yt="${id}" role="button" tabindex="0"
+           aria-label="Play video: ${title}">
+        <img class="video-thumb" loading="lazy" alt=""
+             src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg"
+             onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+        <span class="video-play" aria-hidden="true"></span>
+        <span class="video-title">${title}</span>
+      </div>
+      ${note}
+    </section>`;
+}
+
+// Swap the still frame for the real player, once, on click.
+function armVideos(root=document){
+  root.querySelectorAll('.video[data-yt]').forEach(el => {
+    const play = () => {
+      const id = el.dataset.yt;
+      el.classList.add('is-playing');
+      el.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1"
+        title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    };
+    el.addEventListener('click', play, { once:true });
+    el.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(); }
+    }, { once:true });
+  });
+}
+
+function reportsBlock(reports){
+  if(!reports || !reports.length) return '';
+  return `
+    <div class="side side-block">
+      <h3>Reports</h3>
+      ${reports.map(r => {
+        const href = esc(r.file || r);
+        const kind = href.split('.').pop().toUpperCase();
+        return `<a class="doc" href="${href}" target="_blank" rel="noopener">
+          <span class="doc-kind">${esc(kind)}</span>
+          <span class="doc-body">
+            <span class="doc-title">${esc(r.title || href.split('/').pop())}</span>
+            ${r.date ? `<span class="doc-date">${dateLong(r.date)}</span>` : ''}
+          </span>
+        </a>`;
+      }).join('')}
+    </div>`;
+}
+
 async function viewPosition(ticker){
   const c = computePortfolio();
   const x = c.positions.find(p => p.ticker.toLowerCase() === ticker.toLowerCase());
@@ -356,6 +419,8 @@ async function viewPosition(ticker){
             <code>data/theses/${esc(x.ticker)}.md</code> and it appears here.</p>`}
         </div>
 
+        ${videoBlock(x.video)}
+
         ${updates ? `<section class="section">
           <div class="section-head"><h2>Updates</h2><span class="note">Newest first</span></div>
           <div class="ledger">${updates}</div>
@@ -384,6 +449,8 @@ async function viewPosition(ticker){
             ${x.falsifiers.map(f=>`<li style="margin-bottom:8px">${esc(f)}</li>`).join('')}
           </ul>
         </div>`:''}
+
+        ${reportsBlock(x.reports)}
 
         <div class="side side-block">
           <h3>Trade ledger</h3>
@@ -468,6 +535,7 @@ async function render(){
   else                           html = viewPortfolio();
 
   app.innerHTML = html;
+  armVideos(app);
   window.scrollTo(0,0);
 
   document.querySelectorAll('.nav a').forEach(a => {

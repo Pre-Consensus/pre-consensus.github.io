@@ -26,6 +26,18 @@
         "A second one. Be concrete \u2014 numbers and dates, not vibes.",
         "A third. If you can't name three, you don't understand the position yet."
       ],
+      "_video_example": {
+        "id": "11-character YouTube id from the watch URL, e.g. dQw4w9WgXcQ",
+        "title": "Shown over the still frame",
+        "note": "Optional line underneath. Rename this key to \"video\" to switch it on."
+      },
+      "_reports_example": [
+        {
+          "title": "NEU / AMPAC \u2014 full write-up",
+          "date": "2026-08-26",
+          "file": "reports/NEU-2026-08.pdf"
+        }
+      ],
       "trades": [
         {
           "date": "2026-08-26",

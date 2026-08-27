@@ -117,6 +117,48 @@ That shows every change to the positions and reasoning, and nothing else.
 
 ---
 
+## Video and reports
+
+**Video.** Upload to YouTube (public or unlisted — unlisted works fine and keeps it off
+your channel), then grab the 11-character id from the watch URL:
+
+```
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                                ^^^^^^^^^^^ this part
+```
+
+Add it to the position in `portfolio.json`:
+
+```json
+"video": { "id": "dQw4w9WgXcQ", "title": "Why I'm buying NEU", "note": "Recorded the day of the fill." }
+```
+
+The page shows a still frame in black and white and loads nothing from Google until a
+reader clicks. That keeps the page fast, keeps the monochrome look until it plays, and
+means visitors aren't tracked by YouTube for merely landing on your site. Playback uses
+`youtube-nocookie.com`.
+
+**Reports.** Put PDFs in `reports/` and reference them:
+
+```json
+"reports": [
+  { "title": "NEU / AMPAC — full write-up", "date": "2026-08-26", "file": "reports/NEU-2026-08.pdf" }
+]
+```
+
+Export Word documents to PDF first (**File → Save As → PDF**). Browsers open a PDF in a
+tab; a `.docx` just downloads and needs Word.
+
+Both keys are optional, and the seed position carries `_video_example` and
+`_reports_example` showing the exact shape — drop the leading underscore to switch one on.
+
+**A note on size.** GitHub Pages is meant for a site, not a media library: 1 GB of repo
+space and a 100 GB/month bandwidth guideline. Video on YouTube costs you nothing here,
+which is why it's the right way round. PDFs are small, but if you ever publish hundreds
+of them, that's the limit to keep in mind.
+
+---
+
 ## Licensing
 
 Two licenses, because the code and the research are different things.
