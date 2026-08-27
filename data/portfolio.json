@@ -14,6 +14,9 @@
     "startPrice": 765.91
   },
   "cashFlows": [],
+  "media": [],
+  "mediaHeadline": "Said out loud.",
+  "mediaLede": "Recorded walkthroughs and full written reports. The same calls as the portfolio page, at length and on the record.",
   "methodLede": "The rules I hold myself to, written down before they became inconvenient.",
   "method": "## Why this exists\n\nMost investment writing is graded on prose. This portfolio is graded on money. Every idea here is one I own, sized in dollars I would rather not lose, and the record is kept where I cannot quietly revise it.\n\n## The commitment\n\n- **Positions are published within one trading day of the fill.** Not the week after, not once it works.\n- **The thesis is written before the buy, not after.** If I can't say what I think the market is missing, I don't own it.\n- **Every position names its falsifiers.** The specific things that, if they happen, mean I was wrong. They are listed on the position page and I don't get to move them.\n- **Losers stay on the site.** Closed positions keep their page and their result. A track record that only shows winners isn't a track record.\n\n## How to check me\n\nThis site is generated from a public git repository. Each trade and each thesis is a commit with a timestamp I cannot forge. If you want to know whether a call was really made before the move, read the commit history rather than taking my word for it.\n\n## What this is not\n\nI am not managing money for anyone, not selling anything, and not licensed to advise you. This is my own account. Treat it as one person showing their work.",
   "positions": [

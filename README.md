@@ -152,6 +152,20 @@ tab; a `.docx` just downloads and needs Word.
 Both keys are optional, and the seed position carries `_video_example` and
 `_reports_example` showing the exact shape — drop the leading underscore to switch one on.
 
+**Anything not tied to a holding** — a monthly review, a quarterly letter — goes in the
+top-level `media` array instead, and shows up on the Media page without a ticker badge:
+
+```json
+"media": [
+  { "type": "video",  "id": "dQw4w9WgXcQ", "title": "August: what I got wrong", "date": "2026-08-20" },
+  { "type": "report", "file": "reports/q3-letter.pdf", "title": "Q3 letter", "date": "2026-10-01" }
+]
+```
+
+The **Media** page gathers all of it — position videos, position reports, and standalone
+items — newest first, videos as a grid and reports as a list. Items attached to a holding
+carry its ticker.
+
 **A note on size.** GitHub Pages is meant for a site, not a media library: 1 GB of repo
 space and a 100 GB/month bandwidth guideline. Video on YouTube costs you nothing here,
 which is why it's the right way round. PDFs are small, but if you ever publish hundreds

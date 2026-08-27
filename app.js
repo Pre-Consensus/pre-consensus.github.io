@@ -521,6 +521,110 @@ function viewMethod(){
     </div>`;
 }
 
+/* ---------- media ----------
+   Everything published in a form that isn't a written thesis: recorded
+   walkthroughs and PDF reports. Items can hang off a position (they get a
+   ticker badge and a link back to it) or stand alone at the top level of
+   portfolio.json under "media". */
+
+function collectMedia(){
+  const p = state.portfolio;
+  const videos = [], reports = [];
+
+  for(const pos of (p.positions || [])){
+    const list = pos.videos || (pos.video ? [pos.video] : []);
+    for(const v of list){
+      videos.push({ ...v, ticker: pos.ticker,
+                    date: v.date || (pos.trades||[]).find(t=>t.action==='buy')?.date });
+    }
+    for(const r of (pos.reports || [])) reports.push({ ...r, ticker: pos.ticker });
+  }
+
+  for(const m of (p.media || [])){
+    (m.type === 'report' || m.file ? reports : videos).push(m);
+  }
+
+  const newest = (a,b) => String(b.date||'').localeCompare(String(a.date||''));
+  return { videos: videos.sort(newest), reports: reports.sort(newest) };
+}
+
+function viewMedia(){
+  const { videos, reports } = collectMedia();
+
+  // An <a> inside an <a> is invalid HTML and the parser silently unnests it,
+  // so rows that are themselves links get a plain span instead of a link.
+  const badge = (m, asLink=true) => {
+    if(!m.ticker) return '';
+    return asLink
+      ? `<a class="tag" href="#/p/${encodeURIComponent(m.ticker)}">${esc(m.ticker)}</a>`
+      : `<span class="tag">${esc(m.ticker)}</span>`;
+  };
+
+  const videoCards = videos.map(v => {
+    const id = String(v.id || '').trim();
+    if(!/^[A-Za-z0-9_-]{11}$/.test(id)) return '';
+    return `
+      <article class="media-card">
+        <div class="video" data-yt="${id}" role="button" tabindex="0"
+             aria-label="Play video: ${esc(v.title||'video')}">
+          <img class="video-thumb" loading="lazy" alt=""
+               src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg"
+               onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+          <span class="video-play" aria-hidden="true"></span>
+        </div>
+        <div class="media-meta">
+          <div class="media-when">${badge(v)}${v.date ? dateLong(v.date) : ''}</div>
+          <h3 class="media-title">${esc(v.title || 'Untitled')}</h3>
+          ${v.note ? `<p class="media-note">${esc(v.note)}</p>` : ''}
+        </div>
+      </article>`;
+  }).join('');
+
+  const reportRows = reports.map(r => {
+    const href = esc(r.file || '');
+    const kind = (href.split('.').pop() || 'DOC').toUpperCase();
+    return `
+      <a class="media-row" href="${href}" target="_blank" rel="noopener">
+        <span class="doc-kind">${esc(kind)}</span>
+        <span class="media-row-body">
+          <span class="media-row-title">${esc(r.title || href.split('/').pop())}</span>
+          ${r.note ? `<span class="media-row-note">${esc(r.note)}</span>` : ''}
+        </span>
+        <span class="media-row-meta">${badge(r, false)}${r.date ? dateLong(r.date) : ''}</span>
+      </a>`;
+  }).join('');
+
+  const empty = `
+    <div class="notice">
+      <strong>NOTHING PUBLISHED YET.</strong> Recorded walkthroughs and PDF reports
+      appear here. Add a <code>video</code> or <code>reports</code> key to a position,
+      or a <code>media</code> array at the top of <code>portfolio.json</code> for
+      anything that isn't tied to one holding.
+    </div>`;
+
+  return `
+    <section class="hero">
+      <h1>${esc(state.portfolio.mediaHeadline || 'Said out loud.')}</h1>
+      <p class="lede">${esc(state.portfolio.mediaLede ||
+        'Recorded walkthroughs and full written reports. The same calls as the portfolio page, at length and on the record.')}</p>
+    </section>
+
+    ${(!videos.length && !reports.length) ? empty : ''}
+
+    ${videos.length ? `
+      <section class="section">
+        <div class="section-head"><h2>Video</h2><span class="note">Loads from YouTube only when you press play</span></div>
+        <div class="media-grid">${videoCards}</div>
+      </section>` : ''}
+
+    ${reports.length ? `
+      <section class="section">
+        <div class="section-head"><h2>Reports</h2><span class="note">Opens in a new tab</span></div>
+        <div class="media-list">${reportRows}</div>
+      </section>` : ''}
+  `;
+}
+
 /* ---------- router ---------- */
 
 async function render(){
@@ -532,6 +636,7 @@ async function render(){
   if(route === 'p' && arg)       html = await viewPosition(decodeURIComponent(arg));
   else if(route === 'log')       html = viewLog();
   else if(route === 'method')    html = viewMethod();
+  else if(route === 'media')     html = viewMedia();
   else                           html = viewPortfolio();
 
   app.innerHTML = html;
