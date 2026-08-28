@@ -2,7 +2,7 @@
   "seedData": true,
   "siteTitle": "Pre-Consensus",
   "headline": "Conviction, fully transparent.",
-  "subhead": "A real-money portfolio. Every buy, every sell, and the reasoning behind both \u2014 published at the moment of the decision, not after the outcome is known.",
+  "subhead": "A 21 year old's investing thought process. Every buy and every sell recorded at the moment of the decision — all with reasoning behind it.",
   "broker": "Public.com",
   "inceptionDate": "2026-08-26",
   "startingCash": 25000,
@@ -22,11 +22,11 @@
   "positions": [
     {
       "ticker": "EXMPL",
-      "name": "Example Holdings Inc. \u2014 replace me",
+      "name": "Example Holdings Inc. — replace me",
       "thesisIn": "A one-sentence version of the thesis, shown in the sidebar.",
       "falsifiers": [
         "The specific event that would tell you the thesis is broken.",
-        "A second one. Be concrete \u2014 numbers and dates, not vibes.",
+        "A second one. Be concrete — numbers and dates, not vibes.",
         "A third. If you can't name three, you don't understand the position yet."
       ],
       "_video_example": {
@@ -36,7 +36,7 @@
       },
       "_reports_example": [
         {
-          "title": "NEU / AMPAC \u2014 full write-up",
+          "title": "NEU / AMPAC — full write-up",
           "date": "2026-08-26",
           "file": "reports/NEU-2026-08.pdf"
         }
@@ -55,7 +55,7 @@
         {
           "date": "2026-08-26",
           "title": "Position opened",
-          "body": "Updates go here as the thesis develops. Each one is a dated entry \u2014 add to the list, never edit an old one. If you were wrong, say so in a new entry and leave the old one standing."
+          "body": "Updates go here as the thesis develops. Each one is a dated entry — add to the list, never edit an old one. If you were wrong, say so in a new entry and leave the old one standing."
         }
       ]
     }
