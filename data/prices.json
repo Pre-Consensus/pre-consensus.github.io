@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-09-15T18:08:20+00:00",
+  "asOf": "2026-09-15T18:41:13+00:00",
   "delayed": true,
   "source": "Yahoo Finance (delayed)",
   "failed": [
@@ -7,7 +7,7 @@
   ],
   "quotes": {
     "SPY": {
-      "price": 757.53,
+      "price": 757.195,
       "prevClose": 765.96,
       "src": "yahoo"
     }
